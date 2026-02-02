@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder
 from sklearn.decomposition import PCA
 from sklearn.ensemble import IsolationForest
 
