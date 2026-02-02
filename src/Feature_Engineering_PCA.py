@@ -20,7 +20,7 @@ def engineer_features(input_path):
     
     # Combine encoded categories with the numeric data
     # We use the Log-transformed versions for the final feature set
-    numeric_features = ['CC_Scaled', 'HP_Scaled', 'Speed_Scaled', 'Seats', 'Torque_Log']
+    numeric_features = ['CC_Scaled', 'HP_Scaled', 'Speed_Scaled', 'Seats', 'Torque_Log', 'Acceleration_Scaled']
     final_df = pd.concat([df[numeric_features], encoded_df], axis=1)
     
     # 2. Anomaly Detection (Isolation Forest)
