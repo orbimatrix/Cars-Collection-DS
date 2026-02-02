@@ -56,11 +56,6 @@ if st.button("Estimate Price"):
     # Combine with One-Hot encoded columns
     current_input = pd.concat([input_df, encoded_df], axis=1)
     
-    # --- CRITICAL FIX START ---
-    
-    # 5. Reindex to match the EXACT order PCA/Model saw during training
-    # This adds missing columns as 0 and removes extra columns
-    # We remove 'PCA1', 'PCA2', 'Is_Anomaly', and 'Target' from the requirement list for PCA
     features_for_pca = [col for col in train_cols if col not in ['PCA1', 'PCA2', 'Target_Price_Fixed', 'Is_Anomaly']]
     
     pca_input = current_input.reindex(columns=features_for_pca, fill_value=0)
@@ -75,9 +70,7 @@ if st.button("Estimate Price"):
     
     # 8. Predict
     prediction_fixed = model.predict(final_model_input)
-    
-    # --- CRITICAL FIX END ---
-    
+        
     # 9. Inverse Transform to USD
     price_dummy = np.zeros((1, 4))
     price_dummy[0, 0] = prediction_fixed[0]
