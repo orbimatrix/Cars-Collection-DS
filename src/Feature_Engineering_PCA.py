@@ -1,3 +1,4 @@
+import joblib
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -12,6 +13,8 @@ def engineer_features(input_path):
     encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
     cat_cols = ['Company', 'Fuel_Type']
     encoded_data = encoder.fit_transform(df[cat_cols])
+
+    joblib.dump(encoder, 'models/encoder.pkl')
     
     encoded_df = pd.DataFrame(
         encoded_data, 
@@ -36,11 +39,13 @@ def engineer_features(input_path):
     final_df['Is_Anomaly'] = iso.fit_predict(final_df)
     
     # 3. PCA (Principal Component Analysis)
-    # Reducing high-dimensional data (many companies/fuel types) into 2 components for 2D visuals
     pca = PCA(n_components=2)
+
     pca_results = pca.fit_transform(final_df.drop(columns=['Is_Anomaly']))
     final_df['PCA1'] = pca_results[:, 0]
     final_df['PCA2'] = pca_results[:, 1]
+    joblib.dump(pca, 'models/pca.pkl')
+
     
     final_df['Target_Price_Fixed'] = df['Price_Fixed']
     

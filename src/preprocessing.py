@@ -1,3 +1,4 @@
+import joblib
 import pandas as pd
 import numpy as np
 import re
@@ -65,12 +66,14 @@ def clean_car_data(file_path):
     # Replacing log1p with PowerTransformer for near-perfect symmetry
     pt = PowerTransformer(method='yeo-johnson')
     processed_df[['Price_Fixed', 'Torque_Fixed', 'HP_Fixed', 'CC_Fixed']] = pt.fit_transform(processed_df[['Price', 'Torque', 'HP', 'CC']])
+    joblib.dump(pt, 'models/power_transformer.pkl')
     
    
     # 5. Scaling Phase
     # Scaling raw numeric features for models that are sensitive to magnitude (PCA, KNN, Linear)
     scaler = StandardScaler()
     processed_df[['Speed_Scaled', 'Acc_Scaled']] = scaler.fit_transform(processed_df[['Speed', 'Acceleration']])
+    joblib.dump(scaler, 'models/scaler.pkl')
    
     return processed_df
 
