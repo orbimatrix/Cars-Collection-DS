@@ -1,29 +1,27 @@
 # Cars Dataset Analysis Project
 
-A machine learning and data analysis project for exploring, processing, and modeling the Cars Dataset 2025.
+## Overview
 
-## Project Overview
-
-This project provides a complete pipeline for working with automotive data, including data ingestion, preprocessing, feature engineering, and model training. The project includes exploratory data analysis (EDA) and machine learning workflows.
+The Cars Dataset Analysis Project is designed to analyze automotive data, providing insights through data ingestion, preprocessing, feature engineering, model training, and exploratory data analysis (EDA). This project utilizes various Python libraries to facilitate data manipulation, machine learning, and visualization.
 
 ## Project Structure
 
 ```
 cars/
 ├── data/
-│   ├── Cars Datasets 2025.csv      # Raw cars dataset
-│   └── raw_data.csv                # Processed raw data
+│   ├── Cars Datasets 2025.csv      # Main dataset
+│   └── raw_data.csv                 # Raw data for processing
 ├── notebooks/
-│   └── EDA.ipynb                   # Exploratory Data Analysis notebook
+│   └── EDA.ipynb                    # Exploratory Data Analysis notebook
 ├── src/
-│   ├── data_ingestion.py           # Load and ingest data
-│   ├── preprocessing.py            # Data preprocessing utilities
-│   ├── feature_engineering.py      # Feature creation and transformation
-│   └── model_trainer.py            # Model training pipeline
-├── app.py                          # Streamlit web application
-├── main.py                         # Main entry point
-├── requirements.txt                # Project dependencies
-└── README.md                       # This file
+│   ├── data_ingestion.py            # Data ingestion script
+│   ├── preprocessing.py              # Data preprocessing script
+│   ├── feature_engineering.py        # Feature engineering script
+│   └── model_trainer.py              # Model training pipeline
+├── app.py                            # Streamlit web application
+├── main.py                           # Main entry point
+├── requirements.txt                  # Project dependencies
+└── README.md                         # Project documentation
 ```
 
 ## Dependencies
@@ -39,22 +37,22 @@ cars/
 ## Installation
 
 1. Clone the repository:
-```bash
-git clone <repository-url>
-cd cars
-```
+   ```bash
+   git clone <repository-url>
+   cd cars
+   ```
 
 2. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-venv\Scripts\activate  # On Windows
-# source venv/bin/activate  # On macOS/Linux
-```
+   ```bash
+   python -m venv venv
+   venv\Scripts\activate  # On Windows
+   # source venv/bin/activate  # On macOS/Linux
+   ```
 
 3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Usage
 
@@ -78,19 +76,19 @@ streamlit run app.py
 
 ## Project Workflow
 
-1. **Data Ingestion** (`src/data_ingestion.py`): Load raw data from CSV files
-2. **Preprocessing** (`src/preprocessing.py`): Clean and prepare data
-3. **Feature Engineering** (`src/feature_engineering.py`): Create new features
-4. **Model Training** (`src/model_trainer.py`): Train machine learning models
-5. **Visualization**: Use Streamlit app or Jupyter notebooks for analysis
+1. **Data Ingestion** (`src/data_ingestion.py`): Load raw data from CSV files.
+2. **Preprocessing** (`src/preprocessing.py`): Clean and prepare data.
+3. **Feature Engineering** (`src/feature_engineering.py`): Create new features.
+4. **Model Training** (`src/model_trainer.py`): Train machine learning models.
+5. **Visualization**: Use Streamlit app or Jupyter notebooks for analysis.
 
 ## Key Features
 
-- Automated data pipeline for loading and processing
-- Comprehensive exploratory data analysis
-- Feature engineering for improved model performance
-- Machine learning model training and evaluation
-- Interactive web interface using Streamlit
+- Automated data pipeline for loading and processing.
+- Comprehensive exploratory data analysis.
+- Feature engineering for improved model performance.
+- Machine learning model training and evaluation.
+- Interactive web interface using Streamlit.
 
 ## Data
 
@@ -102,10 +100,10 @@ The project uses the **Cars Dataset 2025**, containing automotive information in
 
 ## Future Enhancements
 
-- Add more advanced feature engineering techniques
-- Implement hyperparameter tuning
-- Add model comparison and selection
-- Enhance visualization and reporting
+- Add more advanced feature engineering techniques.
+- Implement hyperparameter tuning.
+- Add model comparison and selection.
+- Enhance visualization and reporting.
 
 ## Author
 
