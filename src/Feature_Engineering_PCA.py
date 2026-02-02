@@ -19,8 +19,15 @@ def engineer_features(input_path):
     )
     
     # Combine encoded categories with the numeric data
-    # We use the Log-transformed versions for the final feature set
-    numeric_features = ['CC_Scaled', 'HP_Scaled', 'Speed_Scaled', 'Seats', 'Torque_Log', 'Acceleration_Scaled']
+    numeric_features = [
+        'Speed_Scaled', 
+        'Acc_Scaled', 
+        'HP_Fixed', 
+        'CC_Fixed', 
+        'Torque_Fixed',
+        'Seats'
+    ]
+
     final_df = pd.concat([df[numeric_features], encoded_df], axis=1)
     
     # 2. Anomaly Detection (Isolation Forest)
@@ -35,7 +42,7 @@ def engineer_features(input_path):
     final_df['PCA1'] = pca_results[:, 0]
     final_df['PCA2'] = pca_results[:, 1]
     
-    final_df['Target_Price_Log'] = df['Price_Log']
+    final_df['Target_Price_Fixed'] = df['Price_Fixed']
     
     return final_df
 

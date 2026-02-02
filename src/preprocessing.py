@@ -3,6 +3,7 @@ import numpy as np
 import re
 from sklearn.impute import KNNImputer
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import PowerTransformer
 
 def clean_car_data(file_path):
 
@@ -53,17 +54,24 @@ def clean_car_data(file_path):
     imputer = KNNImputer(n_neighbors=5)
     processed_df[numeric_cols] = imputer.fit_transform(processed_df[numeric_cols])
 
-    # 4. Skewness Correction (Log  first)
-    
-    processed_df['Price_Log'] = np.log1p(processed_df['Price'])
-    processed_df['Torque_Log'] = np.log1p(processed_df['Torque'])
+    # 4. Skewness Correction with Quantile Clipping
+    cols_to_fix = ['Price', 'Torque', 'HP', 'CC']
+    for col in cols_to_fix:
+        lower_limit = processed_df[col].quantile(0.01)
+        upper_limit = processed_df[col].quantile(0.99)
+        processed_df[col] = np.clip(processed_df[col], lower_limit, upper_limit)
 
+    # 5. Advanced Skewness Correction (Yeo-Johnson)
+    # Replacing log1p with PowerTransformer for near-perfect symmetry
+    pt = PowerTransformer(method='yeo-johnson')
+    processed_df[['Price_Fixed', 'Torque_Fixed', 'HP_Fixed', 'CC_Fixed']] = pt.fit_transform(processed_df[['Price', 'Torque', 'HP', 'CC']])
+    
+   
     # 5. Scaling Phase
     # Scaling raw numeric features for models that are sensitive to magnitude (PCA, KNN, Linear)
     scaler = StandardScaler()
-    scaled_features = ['CC', 'HP', 'Speed', 'Acceleration']
-    processed_df[[f'{c}_Scaled' for c in scaled_features]] = scaler.fit_transform(processed_df[scaled_features])
-
+    processed_df[['Speed_Scaled', 'Acc_Scaled']] = scaler.fit_transform(processed_df[['Speed', 'Acceleration']])
+   
     return processed_df
 
 # Run the preprocessing
